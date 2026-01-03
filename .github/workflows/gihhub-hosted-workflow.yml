@@ -4,6 +4,8 @@ name: Bootstrap & Deploy to EC2 using git hosted runner
 #   push:
 #     branches:
 #       - main
+on:
+  workflow_dispatch:
 
 jobs:
   deploy:
