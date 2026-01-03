@@ -45,9 +45,9 @@ jobs:
               git reset --hard origin/main
             fi
 
-            echo "🔹 Configure nginx server block"
+          echo "🔹 Configure nginx server block"
 
-            cat <<EOF | sudo tee /etc/nginx/sites-available/app > /dev/null
+          cat <<EOF | sudo tee /etc/nginx/sites-available/app > /dev/null
           server {
               listen 80;
               server_name _;
@@ -60,6 +60,14 @@ jobs:
               }
           }
           EOF
+
+          if [ ! -L /etc/nginx/sites-enabled/app ]; then
+              sudo ln -s /etc/nginx/sites-available/app /etc/nginx/sites-enabled/app
+          fi
+          
+          sudo rm -f /etc/nginx/sites-enabled/default
+          sudo nginx -t
+          sudo systemctl reload nginx
 
       - name: Health check
         run: |
