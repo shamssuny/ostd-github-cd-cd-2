@@ -48,18 +48,18 @@ jobs:
             echo "🔹 Configure nginx server block"
 
             cat <<NGINX | sudo tee /etc/nginx/sites-available/app > /dev/null
-server {
-    listen 80;
-    server_name _;
+          server {
+              listen 80;
+              server_name _;
 
-    root /var/www/app;
-    index index.html;
+              root /var/www/app;
+              index index.html;
 
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
-}
-NGINX
+              location / {
+                  try_files \$uri \$uri/ =404;
+              }
+          }
+          NGINX
 
             if [ ! -L /etc/nginx/sites-enabled/app ]; then
                 sudo ln -s /etc/nginx/sites-available/app /etc/nginx/sites-enabled/app
