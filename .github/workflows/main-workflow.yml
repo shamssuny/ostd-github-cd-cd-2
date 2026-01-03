@@ -68,6 +68,7 @@ jobs:
             sudo rm -f /etc/nginx/sites-enabled/default
             sudo nginx -t
             sudo systemctl reload nginx
+          EOF  
 
       - name: Health check
         run: |
